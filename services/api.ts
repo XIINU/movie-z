@@ -55,5 +55,6 @@ export const fetchMovies = async ({
   }
 
   const data: DummyResponse = await response.json();
+  // console.log("Fetched data:", data);
   return data.products;
 };

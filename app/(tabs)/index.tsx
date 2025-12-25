@@ -12,6 +12,7 @@ import {
 import { useRouter } from "expo-router";
 import useFetch from "@/services/useFetch";
 import { fetchMovies } from "@/services/api";
+import MovieCard from "@/components/MovieCard";
 
 export default function Index() {
   const router = useRouter();
@@ -25,11 +26,7 @@ export default function Index() {
   return (
     <View className="flex-1 bg-primary">
       <Image source={images.bg} className="absolute w-full z-0" />
-      <View
-        className="flex-1 px-5"
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ minHeight: "100%", paddingBottom: 10 }}
-      >
+      <View className="flex-1">
         <Image source={icons.logo} className="w-12 h-10 mt-20 mb-5 mx-auto" />
 
         {moviesLoading ? (
@@ -47,7 +44,7 @@ export default function Index() {
               placeholder="Search for a movie"
             />
             <>
-              <Text className="text-lg text-white font-bold mt-5 mb-3">
+              <Text className="text-lg text-white font-bold mt-5 mb-3 ml-4">
                 Latest Movies
               </Text>
 
@@ -56,18 +53,14 @@ export default function Index() {
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={3}
                 columnWrapperStyle={{
-                  justifyContent: "flex-start",
-                  gap: 20,
-                  paddingRight: 5,
-                  marginBottom: 15,
+                  gap: 16,
+                  marginBottom: 16,
                 }}
-                className="mt-2 pb-32"
-                scrollEnabled={false}
-                renderItem={({ item }) => (
-                  <Text className="text-white text-sm">
-                    {item.title.split(" ")[0]}
-                  </Text>
-                )}
+                contentContainerStyle={{
+                  paddingHorizontal: 16,
+                  paddingBottom: 120,
+                }}
+                renderItem={({ item }) => <MovieCard {...item} />}
               />
             </>
           </View>
